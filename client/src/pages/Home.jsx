@@ -1,8 +1,10 @@
-import { Checkbox, Table } from "flowbite-react";
+import { Button, Checkbox, Table } from "flowbite-react";
 import { useEffect, useState } from "react";
+import CreateToDo from "../components/CreateToDo";
 
 export default function Home() {
   const [toDos, setToDos] = useState([]);
+  const [isAddTodo, setIsAddTodo] = useState(false);
 
   useEffect(() => {
     const fetchToDos = async () => {
@@ -45,6 +47,14 @@ export default function Home() {
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const showAddTodo = async () => {
+    setIsAddTodo(false);
+  };
+
+  const handleAddTodo = async (todo) => {
+    setToDos((toDos) => [...toDos, todo]);
   };
 
   return (
@@ -101,6 +111,16 @@ export default function Home() {
             </Table.Body>
           </Table>
         </div>
+        <Button
+          className={`mx-auto mt-10  ${isAddTodo ? "hidden" : ""}`}
+          gradientDuoTone="purpleToBlue"
+          onClick={() => setIsAddTodo(!isAddTodo)}
+        >
+          Create ToDo
+        </Button>
+        {isAddTodo && (
+          <CreateToDo showAddTodo={showAddTodo} addTodo={handleAddTodo} />
+        )}
       </div>
     </div>
   );
