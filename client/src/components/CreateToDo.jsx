@@ -19,9 +19,8 @@ export default function CreateToDo({ showAddTodo, addTodo }) {
       showAddTodo();
       const data = await res.json();
       console.log(data.data);
-      addTodo(data.data);
       if (res.ok) {
-        console.log("sssss");
+        addTodo(data.data);
       }
     } catch (error) {
       console.log(error);

@@ -1,10 +1,13 @@
-import { Button, Checkbox, Table } from "flowbite-react";
+import { Button, Checkbox, Table, Modal } from "flowbite-react";
 import { useEffect, useState } from "react";
 import CreateToDo from "../components/CreateToDo";
+import { HiOutlineExclamationCircle } from "react-icons/hi";
 
 export default function Home() {
   const [toDos, setToDos] = useState([]);
   const [isAddTodo, setIsAddTodo] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [deleteId, setDeleteId] = useState("");
 
   useEffect(() => {
     const fetchToDos = async () => {
@@ -57,6 +60,23 @@ export default function Home() {
     setToDos((toDos) => [...toDos, todo]);
   };
 
+  const handleDeleteTodo = async () => {
+    setShowModal(false);
+    try {
+      const res = await fetch(`/api/v1/todo?id=${deleteId}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) {
+        console.log(data.message);
+      } else {
+        setToDos((prev) => prev.filter((todo) => todo.id !== deleteId));
+        setDeleteId("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div>
       <div>
@@ -70,9 +90,9 @@ export default function Home() {
               <Table.HeadCell>Delete</Table.HeadCell>
             </Table.Head>
             <Table.Body className="divide-y">
-              {toDos.map((toDo) => (
+              {toDos.map((toDo, index) => (
                 <Table.Row
-                  key={toDo.id}
+                  key={index}
                   className="bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
                   <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
@@ -102,6 +122,10 @@ export default function Home() {
                     <a
                       href="#"
                       className="font-medium text-red-600 hover:underline dark:text-cyan-500"
+                      onClick={() => {
+                        setShowModal(true);
+                        setDeleteId(toDo.id);
+                      }}
                     >
                       Delete
                     </a>
@@ -122,6 +146,30 @@ export default function Home() {
           <CreateToDo showAddTodo={showAddTodo} addTodo={handleAddTodo} />
         )}
       </div>
+      <Modal
+        show={showModal}
+        onClose={() => setShowModal(false)}
+        popup
+        size="md"
+      >
+        <Modal.Header />
+        <Modal.Body>
+          <div className="text-center">
+            <HiOutlineExclamationCircle className="mx-auto h-14 w-14 dark:text-gray-200 text-gray-400 mb-4" />
+            <h3 className="mb-5 text-lg text-gray-500 dark:text-gray-400">
+              Are you sure you want to delete this todo?
+            </h3>
+            <div className="flex justify-center gap-5">
+              <Button color="failure" onClick={handleDeleteTodo}>
+                Yes, I'm sure
+              </Button>
+              <Button color="gray" onClick={() => setShowModal(false)}>
+                No, Cancel
+              </Button>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }
