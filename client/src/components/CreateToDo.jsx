@@ -18,7 +18,6 @@ export default function CreateToDo({ showAddTodo, addTodo }) {
       });
       showAddTodo();
       const data = await res.json();
-      console.log(data.data);
       if (res.ok) {
         addTodo(data.data);
       }
@@ -33,12 +32,6 @@ export default function CreateToDo({ showAddTodo, addTodo }) {
         onSubmit={handleSubmit}
         className="flex max-w-md flex-col gap-4 mx-auto"
       >
-        {/* <div>
-          <div className="mb-2 block">
-            <Label htmlFor="email2" value="ID" />
-          </div>
-          <TextInput id="id" value="2" type="number" required shadow disabled />
-        </div> */}
         <div>
           <div className="mb-2 block">
             <Label htmlFor="password2" value="ToDo" />

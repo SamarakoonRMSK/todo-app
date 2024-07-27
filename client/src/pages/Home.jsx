@@ -2,6 +2,7 @@ import { Button, Checkbox, Table, Modal } from "flowbite-react";
 import { useEffect, useState } from "react";
 import CreateToDo from "../components/CreateToDo";
 import { HiOutlineExclamationCircle } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 export default function Home() {
   const [toDos, setToDos] = useState([]);
@@ -78,10 +79,15 @@ export default function Home() {
   };
 
   return (
-    <div>
+    <div className="bg-blue-200 min-h-screen">
       <div>
-        <div className="overflow-x-auto">
-          <Table hoverable>
+        <div className="container mx-auto px-4 py-10 text-center relative z-10">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold e text-blue-700 mb-6">
+            Welcome to ToDo App
+          </h1>
+        </div>
+        <div className="overflow-x-auto max-w-7xl mx-auto mt-10">
+          <Table hoverable className="border-2 ">
             <Table.Head>
               <Table.HeadCell>ID</Table.HeadCell>
               <Table.HeadCell>ToDo</Table.HeadCell>
@@ -93,12 +99,12 @@ export default function Home() {
               {toDos.map((toDo, index) => (
                 <Table.Row
                   key={index}
-                  className="bg-white dark:border-gray-700 dark:bg-gray-800"
+                  className=" border-1 bg-white dark:border-gray-700 dark:bg-gray-800"
                 >
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
                     {toDo.id}
                   </Table.Cell>
-                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                  <Table.Cell className="whitespace-nowrap font-medium text-gray-900 ">
                     {toDo.description}
                   </Table.Cell>
                   <Table.Cell className="p-4">
@@ -111,12 +117,12 @@ export default function Home() {
                   </Table.Cell>
 
                   <Table.Cell>
-                    <a
-                      href="#"
+                    <Link
+                      to={`/update-todo/${toDo.id}`}
                       className="font-medium text-cyan-600 hover:underline dark:text-cyan-500"
                     >
                       Edit
-                    </a>
+                    </Link>
                   </Table.Cell>
                   <Table.Cell>
                     <a
