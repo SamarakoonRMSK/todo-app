@@ -51,10 +51,10 @@ export default function UpdateToDo({}) {
   };
 
   return (
-    <div className="mt-20">
+    <div className="bg-blue-200 min-h-screen pt-20">
       <form
         onSubmit={handleSubmit}
-        className="flex max-w-md flex-col gap-4 mx-auto"
+        className="flex max-w-md flex-col gap-4 mx-auto  "
       >
         <div>
           <div className="mb-2 block">
@@ -86,7 +86,7 @@ export default function UpdateToDo({}) {
           />
         </div>
 
-        <Button className="mt-5" type="submit">
+        <Button className="mt-5" type="submit" gradientDuoTone="purpleToBlue">
           Update ToDo
         </Button>
       </form>

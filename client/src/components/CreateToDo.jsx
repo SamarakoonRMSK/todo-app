@@ -27,7 +27,7 @@ export default function CreateToDo({ showAddTodo, addTodo }) {
   };
 
   return (
-    <div className="mt-20">
+    <div className="mt-14">
       <form
         onSubmit={handleSubmit}
         className="flex max-w-md flex-col gap-4 mx-auto"
@@ -48,7 +48,7 @@ export default function CreateToDo({ showAddTodo, addTodo }) {
           />
         </div>
 
-        <Button className="mt-5" type="submit">
+        <Button className="mt-5" type="submit" gradientDuoTone="purpleToBlue">
           Add ToDo
         </Button>
       </form>

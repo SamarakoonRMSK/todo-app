@@ -82,11 +82,11 @@ export default function Home() {
     <div className="bg-blue-200 min-h-screen">
       <div>
         <div className="container mx-auto px-4 py-10 text-center relative z-10">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold e text-blue-700 mb-6">
+          <h1 className="text-5xl md:text-5xl lg:text-7xl font-bold e text-blue-700 mb-6">
             Welcome to ToDo App
           </h1>
         </div>
-        <div className="overflow-x-auto max-w-7xl mx-auto mt-10">
+        <div className="overflow-x-auto max-w-7xl mx-auto mt-10 p-3">
           <Table hoverable className="border-2 ">
             <Table.Head>
               <Table.HeadCell>ID</Table.HeadCell>
